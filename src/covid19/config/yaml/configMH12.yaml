@@ -1,0 +1,24 @@
+database:
+  dbname: "mh12"
+  user: "vinodborole"
+  password: "v1n0dmysql"
+  location: "127.0.0.1"
+  port: "3306"
+
+application:
+  http-port: "8080"
+  name: "mh12"
+  token: "mh1201may2020"
+  tokenExpiryHrs: 24
+  user:
+    name: "vinod"
+    phone: "1234"
+    email: "vborole@mh12.org"
+    password: "v1n0db@mh12"
+log:
+  location: "/Users/vinodborole/Documents/personal/interview/go/final/mh12covid19/log/"
+  # error, warning, info, debug
+  level: "info"
+  maxbackups: 250
+  maxage: 60   #days
+
