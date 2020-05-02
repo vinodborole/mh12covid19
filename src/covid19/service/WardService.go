@@ -1,10 +1,13 @@
 package service
 
 import (
+	"covid19/config"
 	"covid19/config/domain"
 	"covid19/infra/database"
 	u "covid19/utils"
+	"encoding/json"
 	"errors"
+	"io/ioutil"
 )
 
 //CreateWard create ward service
@@ -24,6 +27,7 @@ func (sh *Interactor) GetWards(page string) *u.Data {
 //AddWardCase add ward case
 func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, error) {
 	var newWardCase domain.WardCase
+	defer sh.GenerateWardCasesJSON()
 	switch wardCase.Code {
 	case "AB":
 		{
@@ -211,7 +215,6 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 			}
 			u.Copy(&newWardCase, dbpuneRuralCase)
 			return &newWardCase, nil
-
 		}
 	}
 	return nil, errors.New("Invalid ward code")
@@ -241,10 +244,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbAundhBannerCase)
-				newWardCase.Date = dbAundhBannerCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Aundh - Baner"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbAundhBannerCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Aundh - Baner"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "BP":
 			{
@@ -252,10 +257,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbbhawaniPethWardCase)
-				newWardCase.Date = dbbhawaniPethWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Bhawani Peth"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbbhawaniPethWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Bhawani Peth"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "BW":
 			{
@@ -263,10 +270,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbbibwewadiWardCase)
-				newWardCase.Date = dbbibwewadiWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Bibwewadi"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbbibwewadiWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Bibwewadi"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "DS":
 			{
@@ -274,10 +283,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbdhankawadiWard)
-				newWardCase.Date = dbdhankawadiWard.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Dhankawadi - Sahakarnagar"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbdhankawadiWard {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Dhankawadi - Sahakarnagar"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "DP":
 			{
@@ -285,10 +296,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbdholePatilWard)
-				newWardCase.Date = dbdholePatilWard.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Dhole Patil"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbdholePatilWard {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Dhole Patil"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "HM":
 			{
@@ -296,10 +309,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbhadapsarMundhwaWardCase)
-				newWardCase.Date = dbhadapsarMundhwaWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Hadapsar Mundhwa"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbhadapsarMundhwaWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Hadapsar Mundhwa"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "KV":
 			{
@@ -307,10 +322,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbkasbaWardCase)
-				newWardCase.Date = dbkasbaWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Kasba - Visharambaghwada"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbkasbaWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Kasba - Visharambaghwada"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "KY":
 			{
@@ -318,10 +335,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbkondhwaWardCase)
-				newWardCase.Date = dbkondhwaWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Kondhwa - Yewalewadi"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbkondhwaWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Kondhwa - Yewalewadi"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "KB":
 			{
@@ -329,10 +348,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbkothrudWardCase)
-				newWardCase.Date = dbkothrudWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Kothrud - Bavdhan"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbkothrudWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Kothrud - Bavdhan"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "NW":
 			{
@@ -340,10 +361,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbwadgoansheriWardCase)
-				newWardCase.Date = dbwadgoansheriWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Nagar Road - Wadgoansheri"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbwadgoansheriWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Nagar Road - Wadgoansheri"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "SN":
 			{
@@ -351,10 +374,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbshivajiNagarWardCase)
-				newWardCase.Date = dbshivajiNagarWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Shivaji Nagar - Ghole Road"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbshivajiNagarWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Shivaji Nagar - Ghole Road"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "SR":
 			{
@@ -362,10 +387,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbsinhagadRoadWardCase)
-				newWardCase.Date = dbsinhagadRoadWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Singhagad Road"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbsinhagadRoadWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Singhagad Road"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "WR":
 			{
@@ -373,10 +400,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbwanawadiWardCase)
-				newWardCase.Date = dbwanawadiWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Wanawadi - Ramtekdi"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbwanawadiWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Wanawadi - Ramtekdi"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "WK":
 			{
@@ -384,10 +413,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbwarjeWardCase)
-				newWardCase.Date = dbwarjeWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Warje - Karve Nagar"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbwarjeWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Warje - Karve Nagar"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "YKD":
 			{
@@ -395,10 +426,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbyerwadaWardCase)
-				newWardCase.Date = dbyerwadaWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Yerwada - Kalas - Dhanori"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbyerwadaWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Yerwada - Kalas - Dhanori"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		case "PR":
 			{
@@ -406,10 +439,12 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				if err != nil {
 					return nil, err
 				}
-				u.Copy(&newWardCase, dbpuneRuralWardCase)
-				newWardCase.Date = dbpuneRuralWardCase.CreatedAt.Format("2006-01-02")
-				newWardCase.Name = "Pune Rural"
-				wardCases = append(wardCases, &newWardCase)
+				for _, wardCase := range dbpuneRuralWardCase {
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Pune Rural"
+					wardCases = append(wardCases, &newWardCase)
+				}
 			}
 		}
 		return wardCases, nil
@@ -420,118 +455,177 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 //GetAllWardDetailsByCreateDate get all ward details by create date
 func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate string) ([]*domain.WardCase, error) {
 	wardCases := make([]*domain.WardCase, 0)
-	var newWardCase domain.WardCase
+
 	dbAundhBannerCase, err := sh.Db.GetAundhBannerWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbAundhBannerCase)
-		newWardCase.Date = dbAundhBannerCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Aundh - Baner"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbAundhBannerCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Aundh - Baner"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbbhawaniPethWardCase, err := sh.Db.GetBhawaniPethWardByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbbhawaniPethWardCase)
-		newWardCase.Date = dbbhawaniPethWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Bhawani Peth"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbbhawaniPethWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Bhawani Peth"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbbibwewadiWardCase, err := sh.Db.GetBibwewadiWardByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbbibwewadiWardCase)
-		newWardCase.Date = dbbibwewadiWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Bibwewadi"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbbibwewadiWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Bibwewadi"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbdhankawadiWard, err := sh.Db.GetDhankawadiWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbdhankawadiWard)
-		newWardCase.Date = dbdhankawadiWard.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Dhankawadi - Sahakarnagar"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbdhankawadiWard {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Dhankawadi - Sahakarnagar"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbdholePatilWard, err := sh.Db.GetDholePatilWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbdholePatilWard)
-		newWardCase.Date = dbdholePatilWard.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Dhole Patil"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbdholePatilWard {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Dhole Patil"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbhadapsarMundhwaWardCase, err := sh.Db.GetHadapsarMundhwaWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbhadapsarMundhwaWardCase)
-		newWardCase.Date = dbhadapsarMundhwaWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Hadapsar Mundhwa"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbhadapsarMundhwaWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Hadapsar Mundhwa"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbkasbaWardCase, err := sh.Db.GetKasbaWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbkasbaWardCase)
-		newWardCase.Date = dbkasbaWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Kasba - Visharambaghwada"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbkasbaWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Kasba - Visharambaghwada"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbkondhwaWardCase, err := sh.Db.GetKondhwaWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbkondhwaWardCase)
-		newWardCase.Date = dbkondhwaWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Kondhwa - Yewalewadi"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbkondhwaWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Kondhwa - Yewalewadi"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbkothrudWardCase, err := sh.Db.GetKothrudWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbkothrudWardCase)
-		newWardCase.Date = dbkothrudWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Kothrud - Bavdhan"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbkothrudWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Kothrud - Bavdhan"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbwadgoansheriWardCase, err := sh.Db.GetWadgoansheriWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbwadgoansheriWardCase)
-		newWardCase.Date = dbwadgoansheriWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Nagar Road - Wadgoansheri"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbwadgoansheriWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Nagar Road - Wadgoansheri"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbshivajiNagarWardCase, err := sh.Db.GetShivajiNagarWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbshivajiNagarWardCase)
-		newWardCase.Date = dbshivajiNagarWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Shivaji Nagar - Ghole Road"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbshivajiNagarWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Shivaji Nagar - Ghole Road"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbsinhagadRoadWardCase, err := sh.Db.GetSinhagadRoadWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbsinhagadRoadWardCase)
-		newWardCase.Date = dbsinhagadRoadWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Singhagad Road"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbsinhagadRoadWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Singhagad Road"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbwanawadiWardCase, err := sh.Db.GetWanawadiWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbwanawadiWardCase)
-		newWardCase.Date = dbwanawadiWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Wanawadi - Ramtekdi"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbwanawadiWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Wanawadi - Ramtekdi"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbwarjeWardCase, err := sh.Db.GetWarjeWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbwarjeWardCase)
-		newWardCase.Date = dbwarjeWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Warje - Karve Nagar"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbwarjeWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Warje - Karve Nagar"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbyerwadaWardCase, err := sh.Db.GetYerwadaWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbyerwadaWardCase)
-		newWardCase.Date = dbyerwadaWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Yerwada - Kalas - Dhanori"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbyerwadaWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Yerwada - Kalas - Dhanori"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	dbpuneRuralWardCase, err := sh.Db.GetPuneRuralWardCaseByCreateDate(createDate, endDate)
 	if err == nil {
-		u.Copy(&newWardCase, dbpuneRuralWardCase)
-		newWardCase.Date = dbpuneRuralWardCase.CreatedAt.Format("2006-01-02")
-		newWardCase.Name = "Pune Rural"
-		wardCases = append(wardCases, &newWardCase)
+		for _, wardCase := range dbpuneRuralWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Pune Rural"
+			wardCases = append(wardCases, &newWardCase)
+		}
 	}
 	return wardCases, nil
+}
+
+//GenerateWardCasesJSON generate district summary json file
+func (sh *Interactor) GenerateWardCasesJSON() error {
+	wardCases, err := sh.GetAllWardDetailsByCreateDate("2019-12-01", "2040-12-31")
+	if err != nil {
+		return err
+	}
+	file, _ := json.MarshalIndent(wardCases, "", " ")
+	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"ward-all-cases.json", file, 0644)
+	return nil
 }

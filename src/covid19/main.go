@@ -40,6 +40,7 @@ func main() {
 	database.GetWorkingInstance().MigrateSchema()
 	fmt.Println("Create default user")
 	createDefaultUser()
+	generateCaseJSON()
 	createWards()
 	fmt.Println("Starting HTTP server..")
 	_, err = StartHTTPServer()
@@ -125,6 +126,10 @@ func createDefaultUser() {
 	_, _ = infra.GetUseCaseInteractor().CreateUser(&account)
 }
 
+func generateCaseJSON() {
+	infra.GetUseCaseInteractor().GenerateDistrictSummaryJSON()
+	infra.GetUseCaseInteractor().GenerateWardCasesJSON()
+}
 func createWards() {
 	aundhWard := domain.Ward{Name: "Aundh Banner", Code: "AB"}
 	bhawaniPethWard := domain.Ward{Name: "Bhawani Peth", Code: "BP"}

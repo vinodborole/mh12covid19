@@ -20,6 +20,7 @@ type Application struct {
 	Name           string      `yaml:"name"`
 	Token          string      `yaml:"token"`
 	TokenExpiryHrs int         `yaml:"tokenExpiryHrs"`
+	ExportJSONPath string      `yaml:"exportjsonpath"`
 	User           UserAccount `yaml:"user"`
 }
 

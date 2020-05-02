@@ -21,3 +21,4 @@ pkg/**
 .cache
 .settings
 **/log
+**/json

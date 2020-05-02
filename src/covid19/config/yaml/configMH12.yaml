@@ -10,6 +10,7 @@ application:
   name: "mh12"
   token: "mh1201may2020"
   tokenExpiryHrs: 24
+  exportjsonpath: "/Users/vinodborole/Documents/personal/interview/go/final/mh12covid19/json/"
   user:
     name: "vinod"
     phone: "1234"
