@@ -77,8 +77,8 @@ func ReadYamlConfigFile() error {
 }
 
 func getMH12ConfigPath() string {
-	//return GetConfigPath() + "/yaml/configMH12.yaml"
-	return "/Users/vinodborole/Documents/personal/interview/go/mh12covid19/bin/yaml/configMH12.yaml"
+	return GetConfigPath() + "/yaml/configMH12.yaml"
+	//return "/Users/vinodborole/Documents/personal/interview/go/final/mh12covid19/bin/yaml/configMH12.yaml"
 }
 
 //GetConfigPath get config path

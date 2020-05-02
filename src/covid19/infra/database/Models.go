@@ -23,6 +23,15 @@ type Ward struct {
 	Code string
 }
 
+//DistrictCase district case
+type DistrictCase struct {
+	gorm.Model
+
+	Confirmed int
+	Death     int
+	Recovered int
+}
+
 //AundhBaner aundh baner
 type AundhBaner struct {
 	gorm.Model
@@ -31,6 +40,7 @@ type AundhBaner struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //BhawaniPeth bhawani peth
@@ -41,6 +51,7 @@ type BhawaniPeth struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //Bibwewadi bibwewadi
@@ -51,6 +62,7 @@ type Bibwewadi struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //DhankawadiSahakarnagar dhankawadi
@@ -61,6 +73,7 @@ type DhankawadiSahakarnagar struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //DholePatil dhole patil
@@ -71,6 +84,7 @@ type DholePatil struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //HadapsarMundhwa hadapsar mundhwa
@@ -81,6 +95,7 @@ type HadapsarMundhwa struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //KasbaVisharambaghwada kasba
@@ -91,6 +106,7 @@ type KasbaVisharambaghwada struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //KondhwaYewalewadi kondhwa
@@ -101,6 +117,7 @@ type KondhwaYewalewadi struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //KothrudBavdhan kothrud
@@ -111,6 +128,7 @@ type KothrudBavdhan struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //NagarRoadWadgoansheri nagar road
@@ -121,6 +139,7 @@ type NagarRoadWadgoansheri struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //ShivajiNagarGholeRoad shivaji nagar
@@ -131,6 +150,7 @@ type ShivajiNagarGholeRoad struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //SinghagadRoad singhagad
@@ -141,6 +161,7 @@ type SinghagadRoad struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //WanawadiRamtekdi wanawadi
@@ -151,6 +172,7 @@ type WanawadiRamtekdi struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //WarjeKarveNagar warje
@@ -161,6 +183,7 @@ type WarjeKarveNagar struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //YerwadaKalasDhanori yerwada
@@ -171,6 +194,7 @@ type YerwadaKalasDhanori struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }
 
 //PuneRural pune rural
@@ -181,4 +205,5 @@ type PuneRural struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Code      string
 }

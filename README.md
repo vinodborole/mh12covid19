@@ -1,2 +1,3 @@
-# mh12covid19
-Covid19 analysis for pune district
+# MH 12 Covid-19 Pune Tracker
+Covid-19 tracker for pune district
+

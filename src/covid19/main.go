@@ -99,6 +99,13 @@ func StartHTTPServer() (*http.Server, error) {
 	router := mux.NewRouter()
 	router.HandleFunc("/api/v1/login", controllers.Authenticate).Methods(http.MethodPost)
 	router.HandleFunc("/api/v1/wards", controllers.GetWards).Methods(http.MethodGet)
+
+	router.HandleFunc("/api/v1/ward", controllers.AddWardCase).Methods(http.MethodPost)
+	router.HandleFunc("/api/v1/district", controllers.AddDistrictSummary).Methods(http.MethodPost)
+
+	router.HandleFunc("/api/v1/ward-details", controllers.GetWardDetails).Methods(http.MethodGet)
+	router.HandleFunc("/api/v1/district-summary", controllers.GetDistrictSummary).Methods(http.MethodGet)
+
 	router.Use(auth.JwtAuthentication) //attach JWT auth middleware
 	server := &http.Server{Addr: ":" + port, Handler: router}
 	server.ListenAndServe()
