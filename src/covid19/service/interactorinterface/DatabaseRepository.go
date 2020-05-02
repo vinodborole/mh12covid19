@@ -63,4 +63,9 @@ type DatabaseRepository interface {
 	//District
 	AddDistrictCaseSummary(ward *domain.DistrictCase) (*database.DistrictCase, error)
 	GetDistrictSummaryByCreateDate(createDate string, endDate string) ([]database.DistrictCase, error)
+
+	//News
+	AddNews(news *domain.News) (*database.News, error)
+	GetNews(createDate string, endDate string) ([]database.News, error)
+	GetDistrictSummaryByDate(date string) (database.DistrictCase, error)
 }

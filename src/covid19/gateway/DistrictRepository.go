@@ -36,3 +36,10 @@ func (dbRepo *DatabaseRepository) GetDistrictSummaryByCreateDate(createDate stri
 	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBDistrictCase).Error
 	return DBDistrictCase, err
 }
+
+//GetDistrictSummaryByDate get district by date
+func (dbRepo *DatabaseRepository) GetDistrictSummaryByDate(date string) (database.DistrictCase, error) {
+	var DBDistrictCase database.DistrictCase
+	err := dbRepo.GetDBHandle().Where("date(created_at) = ? ", date).Find(&DBDistrictCase).Error
+	return DBDistrictCase, err
+}

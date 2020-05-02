@@ -72,7 +72,7 @@ var GetWardDetails = func(w http.ResponseWriter, r *http.Request) {
 		edate = "2040-01-30"
 	}
 	code := r.URL.Query().Get("code")
-	wardDetails := make([]*domain.WardCase, 0)
+	wardDetails := make([]domain.WardDetail, 0)
 	if len(code) > 0 {
 		wardDetails, err = infra.GetUseCaseInteractor().GetWardDetailsByCreateDateAndCode(sdate, edate, code)
 		if err != nil {

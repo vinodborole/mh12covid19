@@ -15,6 +15,14 @@ type User struct {
 	Token    string `sql:"-"`
 }
 
+//News news
+type News struct {
+	gorm.Model
+
+	Summary string
+	Source  string
+}
+
 //Ward ward
 type Ward struct {
 	gorm.Model

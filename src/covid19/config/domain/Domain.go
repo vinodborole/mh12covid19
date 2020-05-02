@@ -20,20 +20,43 @@ type User struct {
 	Token    string `json:"token"`
 }
 
+//News news
+type News struct {
+	Date    string
+	Summary string
+	Source  string
+}
+
 //Ward ward info
 type Ward struct {
 	Name string
 	Code string
 }
 
+//DistrictDetail District Details
+type DistrictDetail struct {
+	DeltaActive    int
+	DeltaConfirmed int
+	DeltaDeath     int
+	DeltaRecovered int
+	DistrictCases  []DistrictCase
+}
+
 //DistrictCase district case
 type DistrictCase struct {
-	TotalPositive int
-	Active        int
-	Confirmed     int
-	Death         int
-	Recovered     int
-	Date          string
+	Active    int
+	Confirmed int
+	Death     int
+	Recovered int
+	Date      string
+}
+
+//WardDetail ward details
+type WardDetail struct {
+	TotalActive int
+	Code        string
+	Name        string
+	WardCases   []WardCase
 }
 
 //WardCase ward case
@@ -42,9 +65,9 @@ type WardCase struct {
 	Confirmed int
 	Death     int
 	Recovered int
+	Date      string
 	Code      string
 	Name      string
-	Date      string
 }
 
 //AundhBaner aundh baner

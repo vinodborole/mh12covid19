@@ -70,7 +70,7 @@ func (database *Database) open() (err error) {
 //MigrateSchema Migrate DB schema for unit / api integration test code
 func (database *Database) MigrateSchema() (err error) {
 	database.Instance.AutoMigrate(&User{}, &Ward{}, &AundhBaner{}, &BhawaniPeth{}, &Bibwewadi{}, &DhankawadiSahakarnagar{}, &DholePatil{}, &HadapsarMundhwa{}, &KasbaVisharambaghwada{}, &KondhwaYewalewadi{}, &KothrudBavdhan{}, &NagarRoadWadgoansheri{}, &ShivajiNagarGholeRoad{},
-		&SinghagadRoad{}, &WanawadiRamtekdi{}, &WarjeKarveNagar{}, &YerwadaKalasDhanori{}, &PuneRural{}, &DistrictCase{})
+		&SinghagadRoad{}, &WanawadiRamtekdi{}, &WarjeKarveNagar{}, &YerwadaKalasDhanori{}, &PuneRural{}, &DistrictCase{}, &News{})
 	return nil
 }
 

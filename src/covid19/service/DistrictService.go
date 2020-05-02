@@ -5,6 +5,7 @@ import (
 	"covid19/config/domain"
 	"encoding/json"
 	"io/ioutil"
+	"time"
 )
 
 //AddDistrictCaseSummary add district summary
@@ -13,8 +14,7 @@ func (sh *Interactor) AddDistrictCaseSummary(districtCase *domain.DistrictCase) 
 	if err != nil {
 		return nil, err
 	}
-	districtCase.TotalPositive = dbDistrictCase.Confirmed + dbDistrictCase.Death + dbDistrictCase.Recovered
-	districtCase.Active = districtCase.TotalPositive - (dbDistrictCase.Death + dbDistrictCase.Recovered)
+	districtCase.Active = districtCase.Confirmed - (dbDistrictCase.Death + dbDistrictCase.Recovered)
 	defer sh.GenerateDistrictSummaryJSON()
 	return districtCase, nil
 }
@@ -27,22 +27,59 @@ func (sh *Interactor) GetDistrictSummaryByCreateDate(createDate string, endDate 
 	}
 	districtCases := make([]domain.DistrictCase, 0)
 	for _, district := range dbDistrictCase {
-		totalPositive := district.Confirmed + district.Death + district.Recovered
-		active := totalPositive - (district.Death + district.Recovered)
+		active := district.Confirmed - (district.Death + district.Recovered)
 		date := district.CreatedAt.Format("2006-01-02")
-		districtCase := domain.DistrictCase{TotalPositive: totalPositive, Active: active, Confirmed: district.Confirmed, Recovered: district.Recovered, Death: district.Death, Date: date}
+		districtCase := domain.DistrictCase{Active: active, Confirmed: district.Confirmed, Recovered: district.Recovered, Death: district.Death, Date: date}
 		districtCases = append(districtCases, districtCase)
 	}
 	return districtCases, nil
 }
 
+//GetLatestDistrictSummary get latest district summary
+func (sh *Interactor) GetLatestDistrictSummary() (domain.DistrictDetail, error) {
+	var districtDetail domain.DistrictDetail
+	today := time.Now().Format("2006-01-02")
+	eDate := "2040-01-30"
+	dbDistrictCase, err := sh.Db.GetDistrictSummaryByCreateDate(today, eDate)
+	if err != nil {
+		return districtDetail, err
+	}
+	districtCases := make([]domain.DistrictCase, 0)
+	for _, district := range dbDistrictCase {
+		active := district.Confirmed - (district.Death + district.Recovered)
+		date := district.CreatedAt.Format("2006-01-02")
+		districtCase := domain.DistrictCase{Active: active, Confirmed: district.Confirmed, Recovered: district.Recovered, Death: district.Death, Date: date}
+		districtCases = append(districtCases, districtCase)
+	}
+	districtDetail.DistrictCases = districtCases
+
+	todayDistrictCase, err := sh.Db.GetDistrictSummaryByDate(today)
+	if err != nil {
+		return districtDetail, err
+	}
+	previousDay := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
+	previousDayDistrictCase, err := sh.Db.GetDistrictSummaryByDate(previousDay)
+	if err != nil {
+		return districtDetail, err
+	}
+	todayActive := todayDistrictCase.Confirmed - (todayDistrictCase.Death + todayDistrictCase.Recovered)
+	previousDayActive := previousDayDistrictCase.Confirmed - (previousDayDistrictCase.Death + previousDayDistrictCase.Recovered)
+
+	districtDetail.DeltaActive = todayActive - previousDayActive
+	districtDetail.DeltaConfirmed = todayDistrictCase.Confirmed - previousDayDistrictCase.Confirmed
+	districtDetail.DeltaDeath = todayDistrictCase.Death - previousDayDistrictCase.Death
+	districtDetail.DeltaRecovered = todayDistrictCase.Recovered - previousDayDistrictCase.Recovered
+
+	return districtDetail, nil
+}
+
 //GenerateDistrictSummaryJSON generate district summary json
 func (sh *Interactor) GenerateDistrictSummaryJSON() error {
-	districtCase, err := sh.GetDistrictSummaryByCreateDate("2019-12-01", "2040-12-31")
+	districtCase, err := sh.GetLatestDistrictSummary()
 	if err != nil {
 		return err
 	}
 	file, _ := json.MarshalIndent(districtCase, "", " ")
-	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"district-summary.json", file, 0644)
+	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"district-summary-latest.json", file, 0644)
 	return nil
 }

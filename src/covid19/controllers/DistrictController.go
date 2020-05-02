@@ -67,3 +67,17 @@ var GetDistrictSummary = func(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	u.Respond(w, resp)
 }
+
+//GetDistrictSummaryLatest get latest district summary
+var GetDistrictSummaryLatest = func(w http.ResponseWriter, r *http.Request) {
+	districtSummaryLatest, err := infra.GetUseCaseInteractor().GetLatestDistrictSummary()
+	if err != nil {
+		u.Respond(w, u.Message(false, err.Error()))
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	resp := u.Message(true, "District case summary latest fetch successfully")
+	resp["districtSummaryLatest"] = districtSummaryLatest
+	w.WriteHeader(http.StatusOK)
+	u.Respond(w, resp)
+}
