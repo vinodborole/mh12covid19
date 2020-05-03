@@ -46,6 +46,26 @@ var AddWardCase = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp)
 }
 
+//AddBulkWardCase add bulk ward case
+var AddBulkWardCase = func(w http.ResponseWriter, r *http.Request) {
+	wardDetails := &domain.BulkWardDetail{}
+	err := json.NewDecoder(r.Body).Decode(wardDetails) //decode the request body into struct and failed if any error occur
+	if err != nil {
+		u.Respond(w, u.Message(false, "Invalid add ward case request: "+err.Error()))
+		w.WriteHeader(http.StatusUnprocessableEntity)
+		return
+	}
+	err = infra.GetUseCaseInteractor().AddBulkWardCase(wardDetails)
+	if err != nil {
+		u.Respond(w, u.Message(false, err.Error()))
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	resp := u.Message(true, "Added Bulk ward cases successfully")
+	w.WriteHeader(http.StatusCreated)
+	u.Respond(w, resp)
+}
+
 //GetWardDetails get ward details
 var GetWardDetails = func(w http.ResponseWriter, r *http.Request) {
 	sdate := r.URL.Query().Get("sdate")

@@ -24,6 +24,17 @@ func (sh *Interactor) GetWards(page string) *u.Data {
 	return sh.Db.GetWards(page)
 }
 
+//AddBulkWardCase add bulk ward cases
+func (sh *Interactor) AddBulkWardCase(wardDetails *domain.BulkWardDetail) error {
+	for _, wardCase := range wardDetails.WardCases {
+		_, err := sh.AddWardCase(&wardCase)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 //AddWardCase add ward case
 func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, error) {
 	var newWardCase domain.WardCase

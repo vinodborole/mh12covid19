@@ -107,6 +107,7 @@ func StartHTTPServer() (*http.Server, error) {
 	router.HandleFunc("/api/v1/district-summary-latest", controllers.GetDistrictSummaryLatest).Methods(http.MethodGet)
 
 	router.HandleFunc("/api/v1/ward", controllers.AddWardCase).Methods(http.MethodPost)
+	router.HandleFunc("/api/v1/add-bulk-ward", controllers.AddBulkWardCase).Methods(http.MethodPost)
 	router.HandleFunc("/api/v1/district", controllers.AddDistrictSummary).Methods(http.MethodPost)
 	router.HandleFunc("/api/v1/add-news", controllers.AddNews).Methods(http.MethodPost)
 

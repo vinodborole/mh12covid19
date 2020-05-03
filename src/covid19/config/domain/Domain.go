@@ -56,6 +56,11 @@ type DistrictCase struct {
 	Date      string
 }
 
+//BulkWardDetail bulk ward details
+type BulkWardDetail struct {
+	WardCases []WardCase
+}
+
 //WardDetail ward details
 type WardDetail struct {
 	TotalConfirmed int
