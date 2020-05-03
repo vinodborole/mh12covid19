@@ -375,111 +375,111 @@ func (dbRepo *DatabaseRepository) AddPuneRuralWardDBCase(ward *database.PuneRura
 //GetAundhBannerWardCaseByCreateDate get aundh banner ward cases by create date
 func (dbRepo *DatabaseRepository) GetAundhBannerWardCaseByCreateDate(createDate string, endDate string) ([]database.AundhBaner, error) {
 	var DBWardCase []database.AundhBaner
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetBhawaniPethWardByCreateDate get bhawani peth ward cases by create date
 func (dbRepo *DatabaseRepository) GetBhawaniPethWardByCreateDate(createDate string, endDate string) ([]database.BhawaniPeth, error) {
 	var DBWardCase []database.BhawaniPeth
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetBibwewadiWardByCreateDate get bibwewadi ward cases by create date
 func (dbRepo *DatabaseRepository) GetBibwewadiWardByCreateDate(createDate string, endDate string) ([]database.Bibwewadi, error) {
 	var DBWardCase []database.Bibwewadi
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetDhankawadiWardCaseByCreateDate get Dhankawadi Ward cases by create date
 func (dbRepo *DatabaseRepository) GetDhankawadiWardCaseByCreateDate(createDate string, endDate string) ([]database.DhankawadiSahakarnagar, error) {
 	var DBWardCase []database.DhankawadiSahakarnagar
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetDholePatilWardCaseByCreateDate get dhole patil ward cases by create date
 func (dbRepo *DatabaseRepository) GetDholePatilWardCaseByCreateDate(createDate string, endDate string) ([]database.DholePatil, error) {
 	var DBWardCase []database.DholePatil
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetHadapsarMundhwaWardCaseByCreateDate get hadapsar mundhwa ward cases by create date
 func (dbRepo *DatabaseRepository) GetHadapsarMundhwaWardCaseByCreateDate(createDate, endDate string) ([]database.HadapsarMundhwa, error) {
 	var DBWardCase []database.HadapsarMundhwa
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetKasbaWardCaseByCreateDate get Kasba Visharambagh wada ward cases by create date
 func (dbRepo *DatabaseRepository) GetKasbaWardCaseByCreateDate(createDate string, endDate string) ([]database.KasbaVisharambaghwada, error) {
 	var DBWardCase []database.KasbaVisharambaghwada
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetKondhwaWardCaseByCreateDate get Kondhwa Yewalewadi ward cases by create date
 func (dbRepo *DatabaseRepository) GetKondhwaWardCaseByCreateDate(createDate string, endDate string) ([]database.KondhwaYewalewadi, error) {
 	var DBWardCase []database.KondhwaYewalewadi
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetKothrudWardCaseByCreateDate get Kothrud Bavdhan ward cases by create date
 func (dbRepo *DatabaseRepository) GetKothrudWardCaseByCreateDate(createDate string, endDate string) ([]database.KothrudBavdhan, error) {
 	var DBWardCase []database.KothrudBavdhan
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetWadgoansheriWardCaseByCreateDate get Nagar Road Wadgoansheri ward cases by create date
 func (dbRepo *DatabaseRepository) GetWadgoansheriWardCaseByCreateDate(createDate string, endDate string) ([]database.NagarRoadWadgoansheri, error) {
 	var DBWardCase []database.NagarRoadWadgoansheri
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetShivajiNagarWardCaseByCreateDate get Shivaji Nagar Ghole Road ward cases by create date
 func (dbRepo *DatabaseRepository) GetShivajiNagarWardCaseByCreateDate(createDate string, endDate string) ([]database.ShivajiNagarGholeRoad, error) {
 	var DBWardCase []database.ShivajiNagarGholeRoad
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetSinhagadRoadWardCaseByCreateDate get Singhagad Road ward cases by create date
 func (dbRepo *DatabaseRepository) GetSinhagadRoadWardCaseByCreateDate(createDate string, endDate string) ([]database.SinghagadRoad, error) {
 	var DBWardCase []database.SinghagadRoad
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetWanawadiWardCaseByCreateDate get Wanawadi Ramtekdi ward cases by create date
 func (dbRepo *DatabaseRepository) GetWanawadiWardCaseByCreateDate(createDate string, endDate string) ([]database.WanawadiRamtekdi, error) {
 	var DBWardCase []database.WanawadiRamtekdi
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetWarjeWardCaseByCreateDate get Warje Karve Nagar ward cases by create date
 func (dbRepo *DatabaseRepository) GetWarjeWardCaseByCreateDate(createDate string, endDate string) ([]database.WarjeKarveNagar, error) {
 	var DBWardCase []database.WarjeKarveNagar
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetYerwadaWardCaseByCreateDate get Yerwada Kalas Dhanori ward cases by create date
 func (dbRepo *DatabaseRepository) GetYerwadaWardCaseByCreateDate(createDate string, endDate string) ([]database.YerwadaKalasDhanori, error) {
 	var DBWardCase []database.YerwadaKalasDhanori
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }
 
 //GetPuneRuralWardCaseByCreateDate get Pune Rural ward cases by create date
 func (dbRepo *DatabaseRepository) GetPuneRuralWardCaseByCreateDate(createDate string, endDate string) ([]database.PuneRural, error) {
 	var DBWardCase []database.PuneRural
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBWardCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }

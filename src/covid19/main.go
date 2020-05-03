@@ -41,7 +41,7 @@ func main() {
 	fmt.Println("Create default user")
 	createDefaultUser()
 	generateCaseJSON()
-	createWards()
+	//createWards()
 	fmt.Println("Starting HTTP server..")
 	_, err = StartHTTPServer()
 	if err != nil {
@@ -102,13 +102,13 @@ func StartHTTPServer() (*http.Server, error) {
 	router.HandleFunc("/api/v1/wards", controllers.GetWards).Methods(http.MethodGet)
 	router.HandleFunc("/api/v1/news", controllers.GetNews).Methods(http.MethodGet)
 
-	router.HandleFunc("/api/v1/ward", controllers.AddWardCase).Methods(http.MethodPost)
-	router.HandleFunc("/api/v1/district", controllers.AddDistrictSummary).Methods(http.MethodPost)
-	router.HandleFunc("/api/v1/add-news", controllers.AddNews).Methods(http.MethodPost)
-
 	router.HandleFunc("/api/v1/ward-details", controllers.GetWardDetails).Methods(http.MethodGet)
 	router.HandleFunc("/api/v1/district-summary", controllers.GetDistrictSummary).Methods(http.MethodGet)
 	router.HandleFunc("/api/v1/district-summary-latest", controllers.GetDistrictSummaryLatest).Methods(http.MethodGet)
+
+	router.HandleFunc("/api/v1/ward", controllers.AddWardCase).Methods(http.MethodPost)
+	router.HandleFunc("/api/v1/district", controllers.AddDistrictSummary).Methods(http.MethodPost)
+	router.HandleFunc("/api/v1/add-news", controllers.AddNews).Methods(http.MethodPost)
 
 	router.Use(auth.JwtAuthentication) //attach JWT auth middleware
 	server := &http.Server{Addr: ":" + port, Handler: router}
@@ -130,6 +130,7 @@ func createDefaultUser() {
 }
 
 func generateCaseJSON() {
+	infra.GetUseCaseInteractor().GenerateDistrictSummaryLatestJSON()
 	infra.GetUseCaseInteractor().GenerateDistrictSummaryJSON()
 	infra.GetUseCaseInteractor().GenerateWardCasesJSON()
 	infra.GetUseCaseInteractor().GenerateNewsJSON()

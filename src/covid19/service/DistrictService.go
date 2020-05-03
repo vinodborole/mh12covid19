@@ -15,6 +15,7 @@ func (sh *Interactor) AddDistrictCaseSummary(districtCase *domain.DistrictCase) 
 		return nil, err
 	}
 	districtCase.Active = districtCase.Confirmed - (dbDistrictCase.Death + dbDistrictCase.Recovered)
+	defer sh.GenerateDistrictSummaryLatestJSON()
 	defer sh.GenerateDistrictSummaryJSON()
 	return districtCase, nil
 }
@@ -73,13 +74,24 @@ func (sh *Interactor) GetLatestDistrictSummary() (domain.DistrictDetail, error) 
 	return districtDetail, nil
 }
 
-//GenerateDistrictSummaryJSON generate district summary json
-func (sh *Interactor) GenerateDistrictSummaryJSON() error {
+//GenerateDistrictSummaryLatestJSON generate district summary latest json
+func (sh *Interactor) GenerateDistrictSummaryLatestJSON() error {
 	districtCase, err := sh.GetLatestDistrictSummary()
 	if err != nil {
 		return err
 	}
 	file, _ := json.MarshalIndent(districtCase, "", " ")
 	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"district-summary-latest.json", file, 0644)
+	return nil
+}
+
+//GenerateDistrictSummaryJSON generate district summary with date range json
+func (sh *Interactor) GenerateDistrictSummaryJSON() error {
+	districtCase, err := sh.GetDistrictSummaryByCreateDate("2019-12-30", "2040-12-30")
+	if err != nil {
+		return err
+	}
+	file, _ := json.MarshalIndent(districtCase, "", " ")
+	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"district-summary-range.json", file, 0644)
 	return nil
 }

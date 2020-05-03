@@ -33,13 +33,13 @@ func (dbRepo *DatabaseRepository) AddDistrictCaseSummaryDB(DBDistrictCase *datab
 //GetDistrictSummaryByCreateDate get district summary by create date
 func (dbRepo *DatabaseRepository) GetDistrictSummaryByCreateDate(createDate string, endDate string) ([]database.DistrictCase, error) {
 	var DBDistrictCase []database.DistrictCase
-	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Find(&DBDistrictCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Limit(100).Find(&DBDistrictCase).Error
 	return DBDistrictCase, err
 }
 
 //GetDistrictSummaryByDate get district by date
 func (dbRepo *DatabaseRepository) GetDistrictSummaryByDate(date string) (database.DistrictCase, error) {
 	var DBDistrictCase database.DistrictCase
-	err := dbRepo.GetDBHandle().Where("date(created_at) = ? ", date).Find(&DBDistrictCase).Error
+	err := dbRepo.GetDBHandle().Where("date(created_at) = ? ", date).Order("created_at desc").Find(&DBDistrictCase).Error
 	return DBDistrictCase, err
 }
