@@ -10,6 +10,11 @@ type Token struct {
 	jwt.StandardClaims
 }
 
+//MetaDetails meta details
+type MetaDetails struct {
+	LastUpdateDateTime string
+}
+
 //User account info
 type User struct {
 	ID       uint   `json:"id"`

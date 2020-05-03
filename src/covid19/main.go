@@ -134,6 +134,7 @@ func generateCaseJSON() {
 	infra.GetUseCaseInteractor().GenerateDistrictSummaryJSON()
 	infra.GetUseCaseInteractor().GenerateWardCasesJSON()
 	infra.GetUseCaseInteractor().GenerateNewsJSON()
+	infra.GetUseCaseInteractor().GenerateMetaJSON()
 }
 func createWards() {
 	aundhWard := domain.Ward{Name: "Aundh Banner", Code: "AB"}

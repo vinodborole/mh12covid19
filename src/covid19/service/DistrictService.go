@@ -17,6 +17,7 @@ func (sh *Interactor) AddDistrictCaseSummary(districtCase *domain.DistrictCase) 
 	districtCase.Active = districtCase.Confirmed - (dbDistrictCase.Death + dbDistrictCase.Recovered)
 	defer sh.GenerateDistrictSummaryLatestJSON()
 	defer sh.GenerateDistrictSummaryJSON()
+	defer sh.GenerateMetaJSON()
 	return districtCase, nil
 }
 

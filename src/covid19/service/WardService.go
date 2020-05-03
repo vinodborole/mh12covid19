@@ -28,6 +28,7 @@ func (sh *Interactor) GetWards(page string) *u.Data {
 func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, error) {
 	var newWardCase domain.WardCase
 	defer sh.GenerateWardCasesJSON()
+	defer sh.GenerateMetaJSON()
 	switch wardCase.Code {
 	case "AB":
 		{

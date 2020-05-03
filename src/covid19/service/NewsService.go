@@ -6,6 +6,7 @@ import (
 	"covid19/infra/database"
 	"encoding/json"
 	"io/ioutil"
+	"time"
 )
 
 //AddNews add news
@@ -15,6 +16,7 @@ func (sh *Interactor) AddNews(news *domain.News) (*database.News, error) {
 		return nil, err
 	}
 	defer sh.GenerateNewsJSON()
+	defer sh.GenerateMetaJSON()
 	return dbNews, nil
 }
 
@@ -43,5 +45,13 @@ func (sh *Interactor) GenerateNewsJSON() error {
 	}
 	file, _ := json.MarshalIndent(news, "", " ")
 	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"punenews.json", file, 0644)
+	return nil
+}
+
+//GenerateMetaJSON generate meta JSON
+func (sh *Interactor) GenerateMetaJSON() error {
+	metaDetails := domain.MetaDetails{LastUpdateDateTime: time.Now().Format("2006-01-02 15:04:05")}
+	file, _ := json.MarshalIndent(metaDetails, "", " ")
+	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"meta-details.json", file, 0644)
 	return nil
 }
