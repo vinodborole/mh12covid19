@@ -43,35 +43,31 @@ func (sh *Interactor) GetLatestDistrictSummary() (domain.DistrictDetail, error) 
 	today := time.Now().Format("2006-01-02")
 	eDate := "2040-01-30"
 	dbDistrictCase, err := sh.Db.GetDistrictSummaryByCreateDate(today, eDate)
-	if err != nil {
-		return districtDetail, err
-	}
-	districtCases := make([]domain.DistrictCase, 0)
-	for _, district := range dbDistrictCase {
-		active := district.Confirmed - (district.Death + district.Recovered)
-		date := district.CreatedAt.Format("2006-01-02")
-		districtCase := domain.DistrictCase{Active: active, Confirmed: district.Confirmed, Recovered: district.Recovered, Death: district.Death, Date: date}
-		districtCases = append(districtCases, districtCase)
-	}
-	districtDetail.DistrictCases = districtCases
+	if err == nil {
+		districtCases := make([]domain.DistrictCase, 0)
+		for _, district := range dbDistrictCase {
+			active := district.Confirmed - (district.Death + district.Recovered)
+			date := district.CreatedAt.Format("2006-01-02")
+			districtCase := domain.DistrictCase{Active: active, Confirmed: district.Confirmed, Recovered: district.Recovered, Death: district.Death, Date: date}
+			districtCases = append(districtCases, districtCase)
+		}
+		districtDetail.DistrictCases = districtCases
 
-	todayDistrictCase, err := sh.Db.GetDistrictSummaryByDate(today)
-	if err != nil {
-		return districtDetail, err
-	}
-	previousDay := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
-	previousDayDistrictCase, err := sh.Db.GetDistrictSummaryByDate(previousDay)
-	if err != nil {
-		return districtDetail, err
-	}
-	todayActive := todayDistrictCase.Confirmed - (todayDistrictCase.Death + todayDistrictCase.Recovered)
-	previousDayActive := previousDayDistrictCase.Confirmed - (previousDayDistrictCase.Death + previousDayDistrictCase.Recovered)
+		todayDistrictCase, err := sh.Db.GetDistrictSummaryByDate(today)
+		if err == nil {
+			previousDay := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
+			previousDayDistrictCase, err := sh.Db.GetDistrictSummaryByDate(previousDay)
+			if err == nil {
+				todayActive := todayDistrictCase.Confirmed - (todayDistrictCase.Death + todayDistrictCase.Recovered)
+				previousDayActive := previousDayDistrictCase.Confirmed - (previousDayDistrictCase.Death + previousDayDistrictCase.Recovered)
 
-	districtDetail.DeltaActive = todayActive - previousDayActive
-	districtDetail.DeltaConfirmed = todayDistrictCase.Confirmed - previousDayDistrictCase.Confirmed
-	districtDetail.DeltaDeath = todayDistrictCase.Death - previousDayDistrictCase.Death
-	districtDetail.DeltaRecovered = todayDistrictCase.Recovered - previousDayDistrictCase.Recovered
-
+				districtDetail.DeltaActive = todayActive - previousDayActive
+				districtDetail.DeltaConfirmed = todayDistrictCase.Confirmed - previousDayDistrictCase.Confirmed
+				districtDetail.DeltaDeath = todayDistrictCase.Death - previousDayDistrictCase.Death
+				districtDetail.DeltaRecovered = todayDistrictCase.Recovered - previousDayDistrictCase.Recovered
+			}
+		}
+	}
 	return districtDetail, nil
 }
 
