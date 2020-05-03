@@ -34,6 +34,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var aundhBanner domain.AundhBaner
 			u.Copy(&aundhBanner, wardCase)
+			existingTotalCase, err := sh.Db.GetExistingTotalConfirmedAundhBannerWardCase()
+			if err == nil {
+				aundhBanner.Confirmed = wardCase.Confirmed - existingTotalCase
+				if aundhBanner.Confirmed < 0 {
+					aundhBanner.Confirmed = 0
+				}
+			}
 			dbAundhBannerCase, err := sh.Db.AddAundhBannerWardCase(&aundhBanner)
 			if err != nil {
 				return nil, err
@@ -45,6 +52,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var bhawaniPeth domain.BhawaniPeth
 			u.Copy(&bhawaniPeth, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedBhawaniPethWardCase()
+			if err == nil {
+				bhawaniPeth.Confirmed = wardCase.Confirmed - existingCase
+				if bhawaniPeth.Confirmed < 0 {
+					bhawaniPeth.Confirmed = 0
+				}
+			}
 			dbBhawaniPethCase, err := sh.Db.AddBhawaniPethWardCase(&bhawaniPeth)
 			if err != nil {
 				return nil, err
@@ -56,6 +70,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var bibwewadi domain.Bibwewadi
 			u.Copy(&bibwewadi, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedBibwewadiWardCase()
+			if err == nil {
+				bibwewadi.Confirmed = wardCase.Confirmed - existingCase
+				if bibwewadi.Confirmed < 0 {
+					bibwewadi.Confirmed = 0
+				}
+			}
 			dbBhawaniPethCase, err := sh.Db.AddBibwewadiWardCase(&bibwewadi)
 			if err != nil {
 				return nil, err
@@ -67,6 +88,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var dhankawadiSahakarnagar domain.DhankawadiSahakarnagar
 			u.Copy(&dhankawadiSahakarnagar, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedDhankawadiWardCase()
+			if err == nil {
+				dhankawadiSahakarnagar.Confirmed = wardCase.Confirmed - existingCase
+				if dhankawadiSahakarnagar.Confirmed < 0 {
+					dhankawadiSahakarnagar.Confirmed = 0
+				}
+			}
 			dbdhankawadiSahakarnagarCase, err := sh.Db.AddDhankawadiSahakarnagarWardCase(&dhankawadiSahakarnagar)
 			if err != nil {
 				return nil, err
@@ -78,6 +106,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var dholePatil domain.DholePatil
 			u.Copy(&dholePatil, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedDholePatilWardCase()
+			if err == nil {
+				dholePatil.Confirmed = wardCase.Confirmed - existingCase
+				if dholePatil.Confirmed < 0 {
+					dholePatil.Confirmed = 0
+				}
+			}
 			dbdholePatilCase, err := sh.Db.AddDholePatilWardCase(&dholePatil)
 			if err != nil {
 				return nil, err
@@ -90,6 +125,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var hadapsarMundhwa domain.HadapsarMundhwa
 			u.Copy(&hadapsarMundhwa, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedHadapsarMundhwaWardCase()
+			if err == nil {
+				hadapsarMundhwa.Confirmed = wardCase.Confirmed - existingCase
+				if hadapsarMundhwa.Confirmed < 0 {
+					hadapsarMundhwa.Confirmed = 0
+				}
+			}
 			dbhadapsarMundhwaCase, err := sh.Db.AddHadapsarMundhwaWardCase(&hadapsarMundhwa)
 			if err != nil {
 				return nil, err
@@ -102,6 +144,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var kasbaVisharambaghwada domain.KasbaVisharambaghwada
 			u.Copy(&kasbaVisharambaghwada, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedKasbaWardCase()
+			if err == nil {
+				kasbaVisharambaghwada.Confirmed = wardCase.Confirmed - existingCase
+				if kasbaVisharambaghwada.Confirmed < 0 {
+					kasbaVisharambaghwada.Confirmed = 0
+				}
+			}
 			dbkasbaVisharambaghwadaCase, err := sh.Db.AddKasbaVisharambaghwadaWardCase(&kasbaVisharambaghwada)
 			if err != nil {
 				return nil, err
@@ -114,6 +163,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var kondhwaYewalewadi domain.KondhwaYewalewadi
 			u.Copy(&kondhwaYewalewadi, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedKondhwaWardCase()
+			if err == nil {
+				kondhwaYewalewadi.Confirmed = wardCase.Confirmed - existingCase
+				if kondhwaYewalewadi.Confirmed < 0 {
+					kondhwaYewalewadi.Confirmed = 0
+				}
+			}
 			dbkondhwaYewalewadiCase, err := sh.Db.AddKondhwaYewalewadiWardCase(&kondhwaYewalewadi)
 			if err != nil {
 				return nil, err
@@ -126,6 +182,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var kothrudBavdhandomain domain.KothrudBavdhan
 			u.Copy(&kothrudBavdhandomain, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedKothrudWardCase()
+			if err == nil {
+				kothrudBavdhandomain.Confirmed = wardCase.Confirmed - existingCase
+				if kothrudBavdhandomain.Confirmed < 0 {
+					kothrudBavdhandomain.Confirmed = 0
+				}
+			}
 			dbkothrudBavdhandomainCase, err := sh.Db.AddKothrudBavdhanWardCase(&kothrudBavdhandomain)
 			if err != nil {
 				return nil, err
@@ -138,6 +201,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var nagarRoadWadgoansheri domain.NagarRoadWadgoansheri
 			u.Copy(&nagarRoadWadgoansheri, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedWadgoansheriWardCase()
+			if err == nil {
+				nagarRoadWadgoansheri.Confirmed = wardCase.Confirmed - existingCase
+				if nagarRoadWadgoansheri.Confirmed < 0 {
+					nagarRoadWadgoansheri.Confirmed = 0
+				}
+			}
 			dbnagarRoadWadgoansheriCase, err := sh.Db.AddNagarRoadWadgoansheriWardCase(&nagarRoadWadgoansheri)
 			if err != nil {
 				return nil, err
@@ -150,6 +220,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var shivajiNagarGholeRoad domain.ShivajiNagarGholeRoad
 			u.Copy(&shivajiNagarGholeRoad, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedShivajiNagarWardCase()
+			if err == nil {
+				shivajiNagarGholeRoad.Confirmed = wardCase.Confirmed - existingCase
+				if shivajiNagarGholeRoad.Confirmed < 0 {
+					shivajiNagarGholeRoad.Confirmed = 0
+				}
+			}
 			dbshivajiNagarGholeRoadCase, err := sh.Db.AddShivajiNagarGholeRoadWardCase(&shivajiNagarGholeRoad)
 			if err != nil {
 				return nil, err
@@ -162,6 +239,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var singhagadRoad domain.SinghagadRoad
 			u.Copy(&singhagadRoad, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedSinhagadRoadWardCase()
+			if err == nil {
+				singhagadRoad.Confirmed = wardCase.Confirmed - existingCase
+				if singhagadRoad.Confirmed < 0 {
+					singhagadRoad.Confirmed = 0
+				}
+			}
 			dbsinghagadRoadCase, err := sh.Db.AddSinhagadRoadWardCase(&singhagadRoad)
 			if err != nil {
 				return nil, err
@@ -174,6 +258,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var wanawadiRamtekdi domain.WanawadiRamtekdi
 			u.Copy(&wanawadiRamtekdi, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedWanawadiWardCase()
+			if err == nil {
+				wanawadiRamtekdi.Confirmed = wardCase.Confirmed - existingCase
+				if wanawadiRamtekdi.Confirmed < 0 {
+					wanawadiRamtekdi.Confirmed = 0
+				}
+			}
 			dbwanawadiRamtekdiCase, err := sh.Db.AddWanawadiRamtekdiWardCase(&wanawadiRamtekdi)
 			if err != nil {
 				return nil, err
@@ -186,6 +277,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var warjeKarveNagar domain.WarjeKarveNagar
 			u.Copy(&warjeKarveNagar, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedWarjeWardCase()
+			if err == nil {
+				warjeKarveNagar.Confirmed = wardCase.Confirmed - existingCase
+				if warjeKarveNagar.Confirmed < 0 {
+					warjeKarveNagar.Confirmed = 0
+				}
+			}
 			dbwarjeKarveNagarCase, err := sh.Db.AddWarjeKarveNagarWardCase(&warjeKarveNagar)
 			if err != nil {
 				return nil, err
@@ -198,6 +296,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var yerwadaKalasDhanori domain.YerwadaKalasDhanori
 			u.Copy(&yerwadaKalasDhanori, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedYerwadaWardCase()
+			if err == nil {
+				yerwadaKalasDhanori.Confirmed = wardCase.Confirmed - existingCase
+				if yerwadaKalasDhanori.Confirmed < 0 {
+					yerwadaKalasDhanori.Confirmed = 0
+				}
+			}
 			dbyerwadaKalasDhanoriCase, err := sh.Db.AddYerwadaKalasDhanoriWardCase(&yerwadaKalasDhanori)
 			if err != nil {
 				return nil, err
@@ -210,6 +315,13 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 		{
 			var puneRural domain.PuneRural
 			u.Copy(&puneRural, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedPuneRuralWardCase()
+			if err == nil {
+				puneRural.Confirmed = wardCase.Confirmed - existingCase
+				if puneRural.Confirmed < 0 {
+					puneRural.Confirmed = 0
+				}
+			}
 			dbpuneRuralCase, err := sh.Db.AddPuneRuralWardCase(&puneRural)
 			if err != nil {
 				return nil, err
@@ -252,13 +364,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Aundh - Baner"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Aundh - Baner"
 				wardDetail.Code = "AB"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "BP":
@@ -275,13 +387,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Bhawani Peth"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Bhawani Peth"
 				wardDetail.Code = "BP"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "BW":
@@ -298,13 +410,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Bibwewadi"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Bibwewadi"
 				wardDetail.Code = "BW"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "DS":
@@ -321,13 +433,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Dhankawadi - Sahakarnagar"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Dhankawadi - Sahakarnagar"
 				wardDetail.Code = "DS"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "DP":
@@ -344,13 +456,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Dhole Patil"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Dhole Patil"
 				wardDetail.Code = "DP"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "HM":
@@ -367,13 +479,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Hadapsar Mundhwa"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Hadapsar Mundhwa"
 				wardDetail.Code = "HM"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "KV":
@@ -390,13 +502,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Kasba - Visharambaghwada"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Kasba - Visharambaghwada"
 				wardDetail.Code = "KV"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "KY":
@@ -413,13 +525,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Kondhwa - Yewalewadi"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Kondhwa - Yewalewadi"
 				wardDetail.Code = "KY"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "KB":
@@ -436,13 +548,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Kothrud - Bavdhan"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Kothrud - Bavdhan"
 				wardDetail.Code = "KB"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "NW":
@@ -459,13 +571,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Nagar Road - Wadgoansheri"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Nagar Road - Wadgoansheri"
 				wardDetail.Code = "NW"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "SN":
@@ -482,13 +594,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Shivaji Nagar - Ghole Road"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Shivaji Nagar - Ghole Road"
 				wardDetail.Code = "SN"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "SR":
@@ -505,13 +617,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Singhagad Road"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Singhagad Road"
 				wardDetail.Code = "SR"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "WR":
@@ -528,13 +640,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Wanawadi - Ramtekdi"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Wanawadi - Ramtekdi"
 				wardDetail.Code = "WR"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "WK":
@@ -551,13 +663,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Warje - Karve Nagar"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Warje - Karve Nagar"
 				wardDetail.Code = "WK"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "YKD":
@@ -574,13 +686,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Yerwada - Kalas - Dhanori"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Yerwada - Kalas - Dhanori"
 				wardDetail.Code = "YKD"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		case "PR":
@@ -597,13 +709,13 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 					u.Copy(&newWardCase, wardCase)
 					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 					newWardCase.Name = "Pune Rural"
-					total = total + wardCase.Active
+					total = total + wardCase.Confirmed
 					wardCases = append(wardCases, newWardCase)
 				}
 				wardDetail.Name = "Pune Rural"
 				wardDetail.Code = "PR"
 				wardDetail.WardCases = wardCases
-				wardDetail.TotalActive = total
+				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
 		}
@@ -626,13 +738,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Aundh - Baner"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Aundh - Baner"
 		wardDetail.Code = "AB"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 
@@ -646,13 +758,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Bhawani Peth"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Bhawani Peth"
 		wardDetail.Code = "BP"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 
@@ -666,13 +778,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Bibwewadi"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Bibwewadi"
 		wardDetail.Code = "BW"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbdhankawadiWard, err := sh.Db.GetDhankawadiWardCaseByCreateDate(createDate, endDate)
@@ -685,13 +797,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Dhankawadi - Sahakarnagar"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Dhankawadi - Sahakarnagar"
 		wardDetail.Code = "DS"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbdholePatilWard, err := sh.Db.GetDholePatilWardCaseByCreateDate(createDate, endDate)
@@ -704,13 +816,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Dhole Patil"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Dhole Patil"
 		wardDetail.Code = "DP"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbhadapsarMundhwaWardCase, err := sh.Db.GetHadapsarMundhwaWardCaseByCreateDate(createDate, endDate)
@@ -723,13 +835,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Hadapsar Mundhwa"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Hadapsar Mundhwa"
 		wardDetail.Code = "HM"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbkasbaWardCase, err := sh.Db.GetKasbaWardCaseByCreateDate(createDate, endDate)
@@ -742,13 +854,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Kasba - Visharambaghwada"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Kasba - Visharambaghwada"
 		wardDetail.Code = "KV"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbkondhwaWardCase, err := sh.Db.GetKondhwaWardCaseByCreateDate(createDate, endDate)
@@ -761,13 +873,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Kondhwa - Yewalewadi"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Kondhwa - Yewalewadi"
 		wardDetail.Code = "KY"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbkothrudWardCase, err := sh.Db.GetKothrudWardCaseByCreateDate(createDate, endDate)
@@ -780,13 +892,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Kothrud - Bavdhan"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Kothrud - Bavdhan"
 		wardDetail.Code = "KB"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbwadgoansheriWardCase, err := sh.Db.GetWadgoansheriWardCaseByCreateDate(createDate, endDate)
@@ -799,13 +911,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Nagar Road - Wadgoansheri"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Nagar Road - Wadgoansheri"
 		wardDetail.Code = "NW"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbshivajiNagarWardCase, err := sh.Db.GetShivajiNagarWardCaseByCreateDate(createDate, endDate)
@@ -818,13 +930,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Shivaji Nagar - Ghole Road"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Shivaji Nagar - Ghole Road"
 		wardDetail.Code = "SN"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbsinhagadRoadWardCase, err := sh.Db.GetSinhagadRoadWardCaseByCreateDate(createDate, endDate)
@@ -837,13 +949,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Singhagad Road"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Singhagad Road"
 		wardDetail.Code = "SR"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbwanawadiWardCase, err := sh.Db.GetWanawadiWardCaseByCreateDate(createDate, endDate)
@@ -856,13 +968,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Wanawadi - Ramtekdi"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Wanawadi - Ramtekdi"
 		wardDetail.Code = "WR"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbwarjeWardCase, err := sh.Db.GetWarjeWardCaseByCreateDate(createDate, endDate)
@@ -875,13 +987,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Warje - Karve Nagar"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Warje - Karve Nagar"
 		wardDetail.Code = "WK"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbyerwadaWardCase, err := sh.Db.GetYerwadaWardCaseByCreateDate(createDate, endDate)
@@ -894,13 +1006,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Yerwada - Kalas - Dhanori"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Yerwada - Kalas - Dhanori"
 		wardDetail.Code = "YKD"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	dbpuneRuralWardCase, err := sh.Db.GetPuneRuralWardCaseByCreateDate(createDate, endDate)
@@ -913,13 +1025,13 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 			u.Copy(&newWardCase, wardCase)
 			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
 			newWardCase.Name = "Pune Rural"
-			total = total + wardCase.Active
+			total = total + wardCase.Confirmed
 			wardCases = append(wardCases, newWardCase)
 		}
 		wardDetail.Name = "Pune Rural"
 		wardDetail.Code = "PR"
 		wardDetail.WardCases = wardCases
-		wardDetail.TotalActive = total
+		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
 	return wardDetails, nil

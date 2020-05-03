@@ -58,10 +58,10 @@ type DistrictCase struct {
 
 //WardDetail ward details
 type WardDetail struct {
-	TotalActive int
-	Code        string
-	Name        string
-	WardCases   []WardCase
+	TotalConfirmed int
+	Code           string
+	Name           string
+	WardCases      []WardCase
 }
 
 //WardCase ward case

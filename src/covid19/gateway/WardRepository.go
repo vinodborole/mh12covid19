@@ -372,6 +372,118 @@ func (dbRepo *DatabaseRepository) AddPuneRuralWardDBCase(ward *database.PuneRura
 	return ward, nil
 }
 
+//GetExistingTotalConfirmedAundhBannerWardCase get latest aundh banner ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedAundhBannerWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("aundh_baners").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedBhawaniPethWardCase get sum bhawani peth ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedBhawaniPethWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("bhawani_peths").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedBibwewadiWardCase get sum bibwewadi ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedBibwewadiWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("bibwewadis").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedDhankawadiWardCase get sum Dhankawadi Ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedDhankawadiWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("dhankawadi_sahakarnagars").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedDholePatilWardCase get sum dhole patil ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedDholePatilWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("dhole_patils").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedHadapsarMundhwaWardCase get sum hadapsar mundhwa ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedHadapsarMundhwaWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("hadapsar_mundhwas").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedKasbaWardCase get sum Kasba Visharambagh wada ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedKasbaWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("kasba_visharambaghwadas").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedKondhwaWardCase get sum Kondhwa Yewalewadi ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedKondhwaWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("kondhwa_yewalewadis").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedKothrudWardCase get sum Kothrud Bavdhan ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedKothrudWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("kothrud_bavdhans").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedWadgoansheriWardCase get sum Nagar Road Wadgoansheri ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedWadgoansheriWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("nagar_road_wadgoansheris").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedShivajiNagarWardCase get sum Shivaji Nagar Ghole Road ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedShivajiNagarWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("shivaji_nagar_ghole_roads").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedSinhagadRoadWardCase get sum Singhagad Road ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedSinhagadRoadWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("singhagad_roads").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedWanawadiWardCase get sum Wanawadi Ramtekdi ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedWanawadiWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("wanawadi_ramtekdis").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedWarjeWardCase get sum Warje Karve Nagar ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedWarjeWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("warje_karve_nagars").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedYerwadaWardCase get sum Yerwada Kalas Dhanori ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedYerwadaWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("yerwada_kalas_dhanoris").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
+//GetExistingTotalConfirmedPuneRuralWardCase get sum Pune Rural ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedPuneRuralWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("pune_rurals").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
 //GetAundhBannerWardCaseByCreateDate get aundh banner ward cases by create date
 func (dbRepo *DatabaseRepository) GetAundhBannerWardCaseByCreateDate(createDate string, endDate string) ([]database.AundhBaner, error) {
 	var DBWardCase []database.AundhBaner
