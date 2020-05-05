@@ -16,7 +16,6 @@ func (sh *Interactor) AddNews(news *domain.News) (*database.News, error) {
 		return nil, err
 	}
 	defer sh.GenerateNewsJSON()
-	defer sh.GenerateMetaJSON()
 	return dbNews, nil
 }
 

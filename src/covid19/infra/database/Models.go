@@ -31,6 +31,16 @@ type Ward struct {
 	Code string
 }
 
+//PatientSummary patient summary
+type PatientSummary struct {
+	gorm.Model
+
+	TotalTests   int
+	InQuarantine int
+	InICU        int
+	OnVentilator int
+}
+
 //DistrictCase district case
 type DistrictCase struct {
 	gorm.Model

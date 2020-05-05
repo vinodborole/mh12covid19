@@ -38,6 +38,23 @@ type Ward struct {
 	Code string
 }
 
+//PatientDeltaSummary patient delta summary
+type PatientDeltaSummary struct {
+	DeltaTotalTests   int
+	DeltaInQuarantine int
+	DeltaInICU        int
+	DeltaOnVentilator int
+}
+
+//PatientSummary patient summary
+type PatientSummary struct {
+	TotalTests   int
+	InQuarantine int
+	InICU        int
+	OnVentilator int
+	Date         string
+}
+
 //DistrictDetail District Details
 type DistrictDetail struct {
 	DeltaActive    int
@@ -59,6 +76,13 @@ type DistrictCase struct {
 //BulkWardDetail bulk ward details
 type BulkWardDetail struct {
 	WardCases []WardCase
+}
+
+//WardDelta cases
+type WardDelta struct {
+	DeltaConfirmed int
+	Code           string
+	Name           string
 }
 
 //WardDetail ward details

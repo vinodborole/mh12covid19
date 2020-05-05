@@ -105,10 +105,13 @@ func StartHTTPServer() (*http.Server, error) {
 	router.HandleFunc("/api/v1/ward-details", controllers.GetWardDetails).Methods(http.MethodGet)
 	router.HandleFunc("/api/v1/district-summary", controllers.GetDistrictSummary).Methods(http.MethodGet)
 	router.HandleFunc("/api/v1/district-summary-latest", controllers.GetDistrictSummaryLatest).Methods(http.MethodGet)
+	router.HandleFunc("/api/v1/patient-summary", controllers.GetPatientSummary).Methods(http.MethodGet)
+	router.HandleFunc("/api/v1/patient-summary-delta", controllers.GetPatientSummaryDelta).Methods(http.MethodGet)
 
 	router.HandleFunc("/api/v1/ward", controllers.AddWardCase).Methods(http.MethodPost)
 	router.HandleFunc("/api/v1/add-bulk-ward", controllers.AddBulkWardCase).Methods(http.MethodPost)
 	router.HandleFunc("/api/v1/district", controllers.AddDistrictSummary).Methods(http.MethodPost)
+	router.HandleFunc("/api/v1/patient", controllers.AddPatientSummary).Methods(http.MethodPost)
 	router.HandleFunc("/api/v1/add-news", controllers.AddNews).Methods(http.MethodPost)
 
 	router.Use(auth.JwtAuthentication) //attach JWT auth middleware
