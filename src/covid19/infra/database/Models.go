@@ -225,3 +225,14 @@ type PuneRural struct {
 	Recovered int
 	Code      string
 }
+
+//PuneCantonment pune cantonment
+type PuneCantonment struct {
+	gorm.Model
+
+	Active    int
+	Confirmed int
+	Death     int
+	Recovered int
+	Code      string
+}

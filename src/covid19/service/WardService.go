@@ -340,6 +340,24 @@ func (sh *Interactor) AddWardCase(wardCase *domain.WardCase) (*domain.WardCase, 
 			u.Copy(&newWardCase, dbpuneRuralCase)
 			return &newWardCase, nil
 		}
+	case "PC":
+		{
+			var puneCantonment domain.PuneCantonment
+			u.Copy(&puneCantonment, wardCase)
+			existingCase, err := sh.Db.GetExistingTotalConfirmedPuneCantonmentWardCase()
+			if err == nil {
+				puneCantonment.Confirmed = wardCase.Confirmed - existingCase
+				if puneCantonment.Confirmed < 0 {
+					puneCantonment.Confirmed = 0
+				}
+			}
+			dbPuneCantonmentCase, err := sh.Db.AddPuneCantonmentWardCase(&puneCantonment)
+			if err != nil {
+				return nil, err
+			}
+			u.Copy(&newWardCase, dbPuneCantonmentCase)
+			return &newWardCase, nil
+		}
 	}
 	return nil, errors.New("Invalid ward code")
 }
@@ -729,6 +747,29 @@ func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDa
 				wardDetail.TotalConfirmed = total
 				wardDetails = append(wardDetails, wardDetail)
 			}
+		case "PC":
+			{
+				var wardDetail domain.WardDetail
+				wardCases := make([]domain.WardCase, 0)
+				var total int
+				dbpuneCantonmentWardCase, err := sh.Db.GetPuneCantonmentWardCaseByCreateDate(createDate, endDate)
+				if err != nil {
+					return nil, err
+				}
+				for _, wardCase := range dbpuneCantonmentWardCase {
+					var newWardCase domain.WardCase
+					u.Copy(&newWardCase, wardCase)
+					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+					newWardCase.Name = "Pune Cantonment"
+					total = total + wardCase.Confirmed
+					wardCases = append(wardCases, newWardCase)
+				}
+				wardDetail.Name = "Pune Cantonment"
+				wardDetail.Code = "PC"
+				wardDetail.WardCases = wardCases
+				wardDetail.TotalConfirmed = total
+				wardDetails = append(wardDetails, wardDetail)
+			}
 		}
 		return wardDetails, nil
 	}
@@ -1045,6 +1086,26 @@ func (sh *Interactor) GetAllWardDetailsByCreateDate(createDate string, endDate s
 		wardDetail.TotalConfirmed = total
 		wardDetails = append(wardDetails, wardDetail)
 	}
+
+	dbpuneCantonmentWardCase, err := sh.Db.GetPuneCantonmentWardCaseByCreateDate(createDate, endDate)
+	if err == nil {
+		var wardDetail domain.WardDetail
+		var total int
+		wardCases := make([]domain.WardCase, 0)
+		for _, wardCase := range dbpuneCantonmentWardCase {
+			var newWardCase domain.WardCase
+			u.Copy(&newWardCase, wardCase)
+			newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+			newWardCase.Name = "Pune Cantonment"
+			total = total + wardCase.Confirmed
+			wardCases = append(wardCases, newWardCase)
+		}
+		wardDetail.Name = "Pune Cantonment"
+		wardDetail.Code = "PC"
+		wardDetail.WardCases = wardCases
+		wardDetail.TotalConfirmed = total
+		wardDetails = append(wardDetails, wardDetail)
+	}
 	return wardDetails, nil
 }
 
@@ -1168,6 +1229,13 @@ func (sh *Interactor) GenerateWardCasesJSON() error {
 	}
 	file, _ = json.MarshalIndent(wardCases, "", " ")
 	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"ward-pr-cases.json", file, 0644)
+
+	wardCases, err = sh.GetWardDetailsByCreateDateAndCode("2019-12-01", "2040-12-31", "PC")
+	if err != nil {
+		return err
+	}
+	file, _ = json.MarshalIndent(wardCases, "", " ")
+	_ = ioutil.WriteFile(config.GetConfig().MH12Config.Application.ExportJSONPath+"ward-pc-cases.json", file, 0644)
 
 	return nil
 }

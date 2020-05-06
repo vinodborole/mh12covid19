@@ -42,6 +42,7 @@ type DatabaseRepository interface {
 	AddWarjeKarveNagarWardCase(ward *domain.WarjeKarveNagar) (*database.WarjeKarveNagar, error)
 	AddYerwadaKalasDhanoriWardCase(ward *domain.YerwadaKalasDhanori) (*database.YerwadaKalasDhanori, error)
 	AddPuneRuralWardCase(ward *domain.PuneRural) (*database.PuneRural, error)
+	AddPuneCantonmentWardCase(ward *domain.PuneCantonment) (*database.PuneCantonment, error)
 
 	GetExistingTotalConfirmedAundhBannerWardCase() (int, error)
 	GetExistingTotalConfirmedBhawaniPethWardCase() (int, error)
@@ -59,6 +60,7 @@ type DatabaseRepository interface {
 	GetExistingTotalConfirmedWarjeWardCase() (int, error)
 	GetExistingTotalConfirmedYerwadaWardCase() (int, error)
 	GetExistingTotalConfirmedPuneRuralWardCase() (int, error)
+	GetExistingTotalConfirmedPuneCantonmentWardCase() (int, error)
 
 	GetAundhBannerWardCaseByCreateDate(createDate string, endDate string) ([]database.AundhBaner, error)
 	GetBhawaniPethWardByCreateDate(createDate string, endDate string) ([]database.BhawaniPeth, error)
@@ -76,6 +78,7 @@ type DatabaseRepository interface {
 	GetWarjeWardCaseByCreateDate(createDate string, endDate string) ([]database.WarjeKarveNagar, error)
 	GetYerwadaWardCaseByCreateDate(createDate string, endDate string) ([]database.YerwadaKalasDhanori, error)
 	GetPuneRuralWardCaseByCreateDate(createDate string, endDate string) ([]database.PuneRural, error)
+	GetPuneCantonmentWardCaseByCreateDate(createDate string, endDate string) ([]database.PuneCantonment, error)
 
 	//District
 	AddDistrictCaseSummary(ward *domain.DistrictCase) (*database.DistrictCase, error)

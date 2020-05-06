@@ -372,6 +372,26 @@ func (dbRepo *DatabaseRepository) AddPuneRuralWardDBCase(ward *database.PuneRura
 	return ward, nil
 }
 
+//AddPuneCantonmentWardCase add case to Pune cantonment ward
+func (dbRepo *DatabaseRepository) AddPuneCantonmentWardCase(ward *domain.PuneCantonment) (*database.PuneCantonment, error) {
+	var DBWard database.PuneCantonment
+	u.Copy(&DBWard, ward)
+	if len(ward.Date) > 0 {
+		DBWard.CreatedAt, _ = time.Parse("2006-01-02", ward.Date)
+	}
+	return dbRepo.AddPuneCantonmentWardDBCase(&DBWard)
+}
+
+//AddPuneCantonmentWardDBCase add case to Pune Cantonment ward db
+func (dbRepo *DatabaseRepository) AddPuneCantonmentWardDBCase(ward *database.PuneCantonment) (*database.PuneCantonment, error) {
+	err := dbRepo.GetDBHandle().Create(&ward).Error
+	if err != nil {
+		u.Errorln(err.Error())
+		return nil, errors.New("failed to add Pune Cantonment ward case,connection error: " + err.Error())
+	}
+	return ward, nil
+}
+
 //GetExistingTotalConfirmedAundhBannerWardCase get latest aundh banner ward case
 func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedAundhBannerWardCase() (int, error) {
 	var total int
@@ -484,6 +504,13 @@ func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedPuneRuralWardCase() (
 	return total, nil
 }
 
+//GetExistingTotalConfirmedPuneCantonmentWardCase get sum Pune Cantonment ward case
+func (dbRepo *DatabaseRepository) GetExistingTotalConfirmedPuneCantonmentWardCase() (int, error) {
+	var total int
+	dbRepo.GetDBHandle().Table("pune_cantonments").Select("sum(confirmed) as total").Row().Scan(&total)
+	return total, nil
+}
+
 //GetAundhBannerWardCaseByCreateDate get aundh banner ward cases by create date
 func (dbRepo *DatabaseRepository) GetAundhBannerWardCaseByCreateDate(createDate string, endDate string) ([]database.AundhBaner, error) {
 	var DBWardCase []database.AundhBaner
@@ -592,6 +619,13 @@ func (dbRepo *DatabaseRepository) GetYerwadaWardCaseByCreateDate(createDate stri
 //GetPuneRuralWardCaseByCreateDate get Pune Rural ward cases by create date
 func (dbRepo *DatabaseRepository) GetPuneRuralWardCaseByCreateDate(createDate string, endDate string) ([]database.PuneRural, error) {
 	var DBWardCase []database.PuneRural
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
+	return DBWardCase, err
+}
+
+//GetPuneCantonmentWardCaseByCreateDate get Pune Cantonment ward cases by create date
+func (dbRepo *DatabaseRepository) GetPuneCantonmentWardCaseByCreateDate(createDate string, endDate string) ([]database.PuneCantonment, error) {
+	var DBWardCase []database.PuneCantonment
 	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at desc").Find(&DBWardCase).Error
 	return DBWardCase, err
 }

@@ -279,3 +279,14 @@ type PuneRural struct {
 	Name      string
 	Date      string
 }
+
+//PuneCantonment pune cantonment
+type PuneCantonment struct {
+	Active    int
+	Confirmed int
+	Death     int
+	Recovered int
+	Code      string
+	Name      string
+	Date      string
+}
