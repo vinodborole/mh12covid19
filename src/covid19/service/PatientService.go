@@ -40,15 +40,26 @@ func (sh *Interactor) GetPatientSummaryByCreateDate(createDate string, endDate s
 func (sh *Interactor) GetPatientDeltaSummary() (domain.PatientDeltaSummary, error) {
 	var patientDeltaSummary domain.PatientDeltaSummary
 	today := time.Now().Format("2006-01-02")
-	todayPatientSummary, err := sh.Db.GetPatientSummaryByDate(today)
+	eDate := "2040-01-30"
+	dbPatientSummary, err := sh.Db.GetPatientSummaryByCreateDate(today, eDate)
 	if err == nil {
-		previousDay := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
-		previousDayPatientSummary, err := sh.Db.GetPatientSummaryByDate(previousDay)
+		patients := make([]domain.PatientSummary, 0)
+		for _, patient := range dbPatientSummary {
+			var patientSummary domain.PatientSummary
+			u.Copy(&patientSummary, patient)
+			patients = append(patients, patientSummary)
+		}
+		patientDeltaSummary.PatientSummary = patients
+		todayPatientSummary, err := sh.Db.GetPatientSummaryByDate(today)
 		if err == nil {
-			patientDeltaSummary.DeltaTotalTests = todayPatientSummary.TotalTests - previousDayPatientSummary.TotalTests
-			patientDeltaSummary.DeltaInQuarantine = todayPatientSummary.InQuarantine - previousDayPatientSummary.InQuarantine
-			patientDeltaSummary.DeltaInICU = todayPatientSummary.InICU - previousDayPatientSummary.InICU
-			patientDeltaSummary.DeltaOnVentilator = todayPatientSummary.OnVentilator - previousDayPatientSummary.OnVentilator
+			previousDay := time.Now().AddDate(0, 0, -1).Format("2006-01-02")
+			previousDayPatientSummary, err := sh.Db.GetPatientSummaryByDate(previousDay)
+			if err == nil {
+				patientDeltaSummary.DeltaTotalTests = todayPatientSummary.TotalTests - previousDayPatientSummary.TotalTests
+				patientDeltaSummary.DeltaInQuarantine = todayPatientSummary.InQuarantine - previousDayPatientSummary.InQuarantine
+				patientDeltaSummary.DeltaInICU = todayPatientSummary.InICU - previousDayPatientSummary.InICU
+				patientDeltaSummary.DeltaOnVentilator = todayPatientSummary.OnVentilator - previousDayPatientSummary.OnVentilator
+			}
 		}
 	}
 	return patientDeltaSummary, nil

@@ -44,6 +44,7 @@ type PatientDeltaSummary struct {
 	DeltaInQuarantine int
 	DeltaInICU        int
 	DeltaOnVentilator int
+	PatientSummary    []PatientSummary
 }
 
 //PatientSummary patient summary
