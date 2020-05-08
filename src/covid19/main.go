@@ -138,6 +138,8 @@ func generateCaseJSON() {
 	infra.GetUseCaseInteractor().GenerateDistrictSummaryJSON()
 	infra.GetUseCaseInteractor().GenerateWardCasesJSON()
 	infra.GetUseCaseInteractor().GenerateNewsJSON()
+	infra.GetUseCaseInteractor().GeneratePatientDeltaSummaryJSON()
+	infra.GetUseCaseInteractor().GeneratePatientSummaryJSON()
 	infra.GetUseCaseInteractor().GenerateMetaJSON()
 }
 func createWards() {

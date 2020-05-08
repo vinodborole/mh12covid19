@@ -377,403 +377,402 @@ func (sh *Interactor) AddAundhBannerCases(aundhBanner *domain.AundhBaner) (*data
 //GetWardDetailsByCreateDateAndCode get ward details by create date and code
 func (sh *Interactor) GetWardDetailsByCreateDateAndCode(createDate string, endDate string, code string) ([]domain.WardDetail, error) {
 	wardDetails := make([]domain.WardDetail, 0)
-	if sh.Db.WardExists(code) {
-		switch code {
-		case "AB":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbAundhBannerCase, err := sh.Db.GetAundhBannerWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbAundhBannerCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Aundh - Baner"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Aundh - Baner"
-				wardDetail.Code = "AB"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
+	switch code {
+	case "AB":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbAundhBannerCase, err := sh.Db.GetAundhBannerWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
 			}
-		case "BP":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbbhawaniPethWardCase, err := sh.Db.GetBhawaniPethWardByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbbhawaniPethWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Bhawani Peth"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Bhawani Peth"
-				wardDetail.Code = "BP"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
+			for _, wardCase := range dbAundhBannerCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Aundh - Baner"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
 			}
-		case "BW":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbbibwewadiWardCase, err := sh.Db.GetBibwewadiWardByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbbibwewadiWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Bibwewadi"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Bibwewadi"
-				wardDetail.Code = "BW"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "DS":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbdhankawadiWard, err := sh.Db.GetDhankawadiWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbdhankawadiWard {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Dhankawadi - Sahakarnagar"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Dhankawadi - Sahakarnagar"
-				wardDetail.Code = "DS"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "DP":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbdholePatilWard, err := sh.Db.GetDholePatilWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbdholePatilWard {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Dhole Patil"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Dhole Patil"
-				wardDetail.Code = "DP"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "HM":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbhadapsarMundhwaWardCase, err := sh.Db.GetHadapsarMundhwaWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbhadapsarMundhwaWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Hadapsar Mundhwa"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Hadapsar Mundhwa"
-				wardDetail.Code = "HM"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "KV":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbkasbaWardCase, err := sh.Db.GetKasbaWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbkasbaWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Kasba - Visharambaghwada"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Kasba - Visharambaghwada"
-				wardDetail.Code = "KV"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "KY":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbkondhwaWardCase, err := sh.Db.GetKondhwaWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbkondhwaWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Kondhwa - Yewalewadi"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Kondhwa - Yewalewadi"
-				wardDetail.Code = "KY"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "KB":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbkothrudWardCase, err := sh.Db.GetKothrudWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbkothrudWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Kothrud - Bavdhan"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Kothrud - Bavdhan"
-				wardDetail.Code = "KB"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "NW":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbwadgoansheriWardCase, err := sh.Db.GetWadgoansheriWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbwadgoansheriWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Nagar Road - Wadgoansheri"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Nagar Road - Wadgoansheri"
-				wardDetail.Code = "NW"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "SN":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbshivajiNagarWardCase, err := sh.Db.GetShivajiNagarWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbshivajiNagarWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Shivaji Nagar - Ghole Road"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Shivaji Nagar - Ghole Road"
-				wardDetail.Code = "SN"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "SR":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbsinhagadRoadWardCase, err := sh.Db.GetSinhagadRoadWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbsinhagadRoadWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Singhagad Road"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Singhagad Road"
-				wardDetail.Code = "SR"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "WR":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbwanawadiWardCase, err := sh.Db.GetWanawadiWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbwanawadiWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Wanawadi - Ramtekdi"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Wanawadi - Ramtekdi"
-				wardDetail.Code = "WR"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "WK":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbwarjeWardCase, err := sh.Db.GetWarjeWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbwarjeWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Warje - Karve Nagar"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Warje - Karve Nagar"
-				wardDetail.Code = "WK"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "YKD":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbyerwadaWardCase, err := sh.Db.GetYerwadaWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbyerwadaWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Yerwada - Kalas - Dhanori"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Yerwada - Kalas - Dhanori"
-				wardDetail.Code = "YKD"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "PR":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbpuneRuralWardCase, err := sh.Db.GetPuneRuralWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbpuneRuralWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Pune Rural"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Pune Rural"
-				wardDetail.Code = "PR"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
-		case "PC":
-			{
-				var wardDetail domain.WardDetail
-				wardCases := make([]domain.WardCase, 0)
-				var total int
-				dbpuneCantonmentWardCase, err := sh.Db.GetPuneCantonmentWardCaseByCreateDate(createDate, endDate)
-				if err != nil {
-					return nil, err
-				}
-				for _, wardCase := range dbpuneCantonmentWardCase {
-					var newWardCase domain.WardCase
-					u.Copy(&newWardCase, wardCase)
-					newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
-					newWardCase.Name = "Pune Cantonment"
-					total = total + wardCase.Confirmed
-					wardCases = append(wardCases, newWardCase)
-				}
-				wardDetail.Name = "Pune Cantonment"
-				wardDetail.Code = "PC"
-				wardDetail.WardCases = wardCases
-				wardDetail.TotalConfirmed = total
-				wardDetails = append(wardDetails, wardDetail)
-			}
+			wardDetail.Name = "Aundh - Baner"
+			wardDetail.Code = "AB"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
 		}
-		return wardDetails, nil
+	case "BP":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbbhawaniPethWardCase, err := sh.Db.GetBhawaniPethWardByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbbhawaniPethWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Bhawani Peth"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Bhawani Peth"
+			wardDetail.Code = "BP"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "BW":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbbibwewadiWardCase, err := sh.Db.GetBibwewadiWardByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbbibwewadiWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Bibwewadi"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Bibwewadi"
+			wardDetail.Code = "BW"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "DS":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbdhankawadiWard, err := sh.Db.GetDhankawadiWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbdhankawadiWard {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Dhankawadi - Sahakarnagar"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Dhankawadi - Sahakarnagar"
+			wardDetail.Code = "DS"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "DP":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbdholePatilWard, err := sh.Db.GetDholePatilWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbdholePatilWard {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Dhole Patil"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Dhole Patil"
+			wardDetail.Code = "DP"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "HM":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbhadapsarMundhwaWardCase, err := sh.Db.GetHadapsarMundhwaWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbhadapsarMundhwaWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Hadapsar Mundhwa"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Hadapsar Mundhwa"
+			wardDetail.Code = "HM"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "KV":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbkasbaWardCase, err := sh.Db.GetKasbaWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbkasbaWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Kasba - Visharambaghwada"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Kasba - Visharambaghwada"
+			wardDetail.Code = "KV"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "KY":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbkondhwaWardCase, err := sh.Db.GetKondhwaWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbkondhwaWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Kondhwa - Yewalewadi"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Kondhwa - Yewalewadi"
+			wardDetail.Code = "KY"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "KB":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbkothrudWardCase, err := sh.Db.GetKothrudWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbkothrudWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Kothrud - Bavdhan"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Kothrud - Bavdhan"
+			wardDetail.Code = "KB"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "NW":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbwadgoansheriWardCase, err := sh.Db.GetWadgoansheriWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbwadgoansheriWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Nagar Road - Wadgoansheri"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Nagar Road - Wadgoansheri"
+			wardDetail.Code = "NW"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "SN":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbshivajiNagarWardCase, err := sh.Db.GetShivajiNagarWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbshivajiNagarWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Shivaji Nagar - Ghole Road"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Shivaji Nagar - Ghole Road"
+			wardDetail.Code = "SN"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "SR":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbsinhagadRoadWardCase, err := sh.Db.GetSinhagadRoadWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbsinhagadRoadWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Singhagad Road"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Singhagad Road"
+			wardDetail.Code = "SR"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "WR":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbwanawadiWardCase, err := sh.Db.GetWanawadiWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbwanawadiWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Wanawadi - Ramtekdi"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Wanawadi - Ramtekdi"
+			wardDetail.Code = "WR"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "WK":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbwarjeWardCase, err := sh.Db.GetWarjeWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbwarjeWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Warje - Karve Nagar"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Warje - Karve Nagar"
+			wardDetail.Code = "WK"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "YKD":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbyerwadaWardCase, err := sh.Db.GetYerwadaWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbyerwadaWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Yerwada - Kalas - Dhanori"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Yerwada - Kalas - Dhanori"
+			wardDetail.Code = "YKD"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "PR":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbpuneRuralWardCase, err := sh.Db.GetPuneRuralWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbpuneRuralWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Pune Rural"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Pune Rural"
+			wardDetail.Code = "PR"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	case "PC":
+		{
+			var wardDetail domain.WardDetail
+			wardCases := make([]domain.WardCase, 0)
+			var total int
+			dbpuneCantonmentWardCase, err := sh.Db.GetPuneCantonmentWardCaseByCreateDate(createDate, endDate)
+			if err != nil {
+				return nil, err
+			}
+			for _, wardCase := range dbpuneCantonmentWardCase {
+				var newWardCase domain.WardCase
+				u.Copy(&newWardCase, wardCase)
+				newWardCase.Date = wardCase.CreatedAt.Format("2006-01-02")
+				newWardCase.Name = "Pune Cantonment"
+				total = total + wardCase.Confirmed
+				wardCases = append(wardCases, newWardCase)
+			}
+			wardDetail.Name = "Pune Cantonment"
+			wardDetail.Code = "PC"
+			wardDetail.WardCases = wardCases
+			wardDetail.TotalConfirmed = total
+			wardDetails = append(wardDetails, wardDetail)
+		}
+	default:
+		return nil, errors.New("invalid ward code")
 	}
-	return nil, errors.New("invalid ward code")
+	return wardDetails, nil
 }
 
 //GetAllWardDetailsByCreateDate get all ward details by create date
