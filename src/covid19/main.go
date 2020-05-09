@@ -136,6 +136,7 @@ func createDefaultUser() {
 func generateCaseJSON() {
 	infra.GetUseCaseInteractor().GenerateDistrictSummaryLatestJSON()
 	infra.GetUseCaseInteractor().GenerateDistrictSummaryJSON()
+	infra.GetUseCaseInteractor().GenerateDistrictDetailJSON()
 	infra.GetUseCaseInteractor().GenerateWardCasesJSON()
 	infra.GetUseCaseInteractor().GenerateNewsJSON()
 	infra.GetUseCaseInteractor().GeneratePatientDeltaSummaryJSON()

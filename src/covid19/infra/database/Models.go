@@ -41,6 +41,16 @@ type PatientSummary struct {
 	OnVentilator int
 }
 
+//DistrictDetail District Details
+type DistrictDetail struct {
+	gorm.Model
+
+	DeltaActive    int
+	DeltaConfirmed int
+	DeltaDeath     int
+	DeltaRecovered int
+}
+
 //DistrictCase district case
 type DistrictCase struct {
 	gorm.Model

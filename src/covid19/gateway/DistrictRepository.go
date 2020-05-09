@@ -30,11 +30,38 @@ func (dbRepo *DatabaseRepository) AddDistrictCaseSummaryDB(DBDistrictCase *datab
 	return DBDistrictCase, nil
 }
 
+//AddDistrictDetail add delta
+func (dbRepo *DatabaseRepository) AddDistrictDetail(districtDetail *domain.DistrictDetail) (*database.DistrictDetail, error) {
+	var DBDistrictDetail database.DistrictDetail
+	DBDistrictDetail.DeltaActive = districtDetail.DeltaActive
+	DBDistrictDetail.DeltaRecovered = districtDetail.DeltaRecovered
+	DBDistrictDetail.DeltaDeath = districtDetail.DeltaDeath
+	DBDistrictDetail.DeltaConfirmed = districtDetail.DeltaConfirmed
+	return dbRepo.AddDistrictDetailDB(&DBDistrictDetail)
+}
+
+//AddDistrictDetailDB add delta to db
+func (dbRepo *DatabaseRepository) AddDistrictDetailDB(DBDistrictDetail *database.DistrictDetail) (*database.DistrictDetail, error) {
+	err := dbRepo.GetDBHandle().Create(&DBDistrictDetail).Error
+	if err != nil {
+		u.Errorln(err.Error())
+		return nil, errors.New("failed to add district detail ,connection error: " + err.Error())
+	}
+	return DBDistrictDetail, nil
+}
+
 //GetDistrictSummaryByCreateDate get district summary by create date
 func (dbRepo *DatabaseRepository) GetDistrictSummaryByCreateDate(createDate string, endDate string) ([]database.DistrictCase, error) {
 	var DBDistrictCase []database.DistrictCase
 	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at asc").Limit(100).Find(&DBDistrictCase).Error
 	return DBDistrictCase, err
+}
+
+//GetDistrictDetailByCreateDate get district detail by create date
+func (dbRepo *DatabaseRepository) GetDistrictDetailByCreateDate(createDate string, endDate string) ([]database.DistrictDetail, error) {
+	var DBDistrictDetail []database.DistrictDetail
+	err := dbRepo.GetDBHandle().Where("date(created_at) >= ? and date(created_at) <= ?", createDate, endDate).Order("created_at asc").Limit(100).Find(&DBDistrictDetail).Error
+	return DBDistrictDetail, err
 }
 
 //GetDistrictSummaryByDate get district by date
