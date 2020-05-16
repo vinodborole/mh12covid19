@@ -89,6 +89,8 @@ type WardDelta struct {
 //WardDetail ward details
 type WardDetail struct {
 	TotalConfirmed int
+	TotalRecovery  int
+	TotalDeath     int
 	Code           string
 	Name           string
 	WardCases      []WardCase
